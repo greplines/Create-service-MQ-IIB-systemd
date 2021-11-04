@@ -1,0 +1,17 @@
+########################################################
+#va en /etc/systemd/system: se llama middleware.service#
+########################################################
+[Unit]
+    Description=MQ
+    After=network.target
+
+[Service]
+    Type=forking
+    User=mqsi
+    Group=mqsi
+    ExecStart=/applications/mqm/script-middleware.sh start
+    ExecStop=/applications/mqm/script-middleware.sh stop
+    SyslogIdentifier=mqsi-%i
+
+[Install]
+    WantedBy=multi-user.target
